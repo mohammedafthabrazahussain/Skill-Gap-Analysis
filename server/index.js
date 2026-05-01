@@ -14,6 +14,16 @@ const analysis = require('./routes/analysis');
 const resume = require('./routes/resume');
 const tasks = require('./routes/tasks');
 
+// 🔍 DEBUG: Check if any route is undefined
+console.log({
+    auth,
+    skills,
+    roles,
+    analysis,
+    resume,
+    tasks
+});
+
 const app = express();
 
 // Middleware
@@ -28,12 +38,12 @@ app.use('/api/v1/analysis', analysis);
 app.use('/api/v1/resume', resume);
 app.use('/api/v1/tasks', tasks);
 
-// Root route (optional but useful)
+// Root route
 app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-// Connect to MongoDB (NO app.listen)
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error(`Mongo Error: ${err.message}`));
