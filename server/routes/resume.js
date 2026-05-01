@@ -12,17 +12,11 @@ const upload = multer({ storage });
 router.post(
     '/upload',
     protect,
-    (req, res, next) => {
-        console.log('POST /api/v1/resume/upload - Request Received');
-        console.log('User ID:', req.user ? req.user.id : 'No user found');
-        next();
-    },
     upload.single('resume'),
     analyzeResume
 );
 
-// ✅ Debug AFTER router is created
-console.log("Resume router:", router);
+// Debug (optional)
+console.log("Resume router loaded");
 
-// ✅ Export AFTER everything is defined
 module.exports = router;
