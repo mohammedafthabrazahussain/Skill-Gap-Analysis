@@ -14,16 +14,6 @@ const analysis = require('./routes/analysis');
 const resume = require('./routes/resume');
 const tasks = require('./routes/tasks');
 
-// 🔍 DEBUG: Check if any route is undefined
-console.log({
-    auth,
-    skills,
-    roles,
-    analysis,
-    resume,
-    tasks
-});
-
 const app = express();
 
 // Middleware
@@ -45,8 +35,20 @@ app.get('/', (req, res) => {
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('MongoDB Connected'))
-    .catch(err => console.error(`Mongo Error: ${err.message}`));
+    .then(() => {
+        console.log('MongoDB Connected');
+        // Only start the server if not being imported (for local dev)
+        if (require.main === module) {
+            const PORT = process.env.PORT || 5000;
+            app.listen(PORT, () => {
+                console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+            });
+        }
+    })
+    .catch(err => {
+        console.error(`Mongo Error: ${err.message}`);
+        process.exit(1);
+    });
 
 // Export app for Vercel
 module.exports = app;
