@@ -205,22 +205,4 @@ Password: adminpassword
 * Study planner and reminders
 * Industry comparison dashboard
 
----
 
-## Contribution
-
-Contributions are welcome. You may fork the repository and submit pull requests.
-
----
-
-## License
-
-This project is intended for educational and demonstration purposes.
-
----
-
-## Final Note
-
-SkillGap.AI is designed as a structured career guidance system that helps users move from uncertainty to clarity through data-driven insights and guided learning paths.
-
----
